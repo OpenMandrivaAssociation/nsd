@@ -1,11 +1,11 @@
 Summary:	NSD is a complete implementation of an authoritative DNS name server
 Name:		nsd
-Version:	3.0.3
+Version:	3.0.5
 Release:	%mkrel 1
 License:	BSD-like
 Group:		System/Servers
 URL:		http://open.nlnetlabs.nl/nsd/
-Source0:	http://open.nlnetlabs.nl/downloads/nsd/%{name}-%{version}.tar.bz2
+Source0:	http://open.nlnetlabs.nl/downloads/nsd/%{name}-%{version}.tar.gz
 Source1:	nsd.init
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
@@ -75,5 +75,3 @@ rm -rf %{buildroot}
 %attr(0711,%{name},%{name}) %dir /var/run/%{name}
 %attr(0755,root,root) %{_sbindir}/*
 %attr(0644,root,root) %{_mandir}/*/*
-
-

@@ -1,6 +1,6 @@
 Summary:	NSD is a complete implementation of an authoritative DNS name server
 Name:		nsd
-Version:	3.0.5
+Version:	3.0.6
 Release:	%mkrel 1
 License:	BSD-like
 Group:		System/Servers
@@ -26,6 +26,7 @@ REQUIREMENTS document which is a part of this distribution (thanks to Olaf).
 %setup -q 
 
 %build
+%serverbuild
 
 %configure2_5x \
     --enable-bind8-stats \

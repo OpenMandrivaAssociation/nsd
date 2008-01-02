@@ -14,6 +14,7 @@ Requires(postun): rpm-helper
 BuildRequires:	flex
 BuildRequires:	openssl-devel
 Conflicts:	bind pdns
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 NSD is a complete implementation of an authoritative DNS name server. For

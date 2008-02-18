@@ -1,4 +1,4 @@
-Summary:	NSD is a complete implementation of an authoritative DNS name server
+Summary:	Complete implementation of an authoritative DNS name server
 Name:		nsd
 Version:	3.0.6
 Release:	%mkrel 1

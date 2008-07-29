@@ -1,7 +1,7 @@
 Summary:	Complete implementation of an authoritative DNS name server
 Name:		nsd
 Version:	3.0.6
-Release:	%mkrel 2
+Release:	%mkrel 4
 License:	BSD-like
 Group:		System/Servers
 URL:		http://open.nlnetlabs.nl/nsd/

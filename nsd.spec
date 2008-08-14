@@ -1,7 +1,7 @@
 Summary:	Complete implementation of an authoritative DNS name server
 Name:		nsd
-Version:	3.0.6
-Release:	%mkrel 4
+Version:	3.1.1
+Release:	%mkrel 1
 License:	BSD-like
 Group:		System/Servers
 URL:		http://open.nlnetlabs.nl/nsd/
@@ -11,10 +11,12 @@ Requires(post): rpm-helper
 Requires(preun): rpm-helper
 Requires(pre): rpm-helper
 Requires(postun): rpm-helper
+BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	openssl-devel
+BuildRequires:	tcp_wrappers-devel
 Conflicts:	bind pdns
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 NSD is a complete implementation of an authoritative DNS name server. For
@@ -25,6 +27,9 @@ REQUIREMENTS document which is a part of this distribution (thanks to Olaf).
 
 %setup -q 
 
+# lib64 fix
+perl -pi -e "s|/lib\b|/%{_lib}|g" configure*
+
 %build
 %serverbuild
 
@@ -34,6 +39,10 @@ REQUIREMENTS document which is a part of this distribution (thanks to Olaf).
     --enable-checking \
     --enable-mmap \
     --with-pidfile=/var/run/%{name}/%{name}.pid \
+    --localstatedir=/var/lib \
+    --with-dbfile=/var/lib/%{name}/nsd.db \
+    --with-difffile=/var/lib/%{name}/ixfr.db \
+    --with-xfrdfile=/var/lib/%{name}/xfrd.state \
     --with-ssl \
     --with-user=%{name}
 
@@ -46,6 +55,7 @@ rm -rf %{buildroot}
 
 install -d %{buildroot}%{_initrddir}
 install -d %{buildroot}/var/run/%{name}
+install -d %{buildroot}/var/lib/%{name}
 
 install -m0755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 
@@ -74,5 +84,6 @@ rm -rf %{buildroot}
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/nsd/nsd.conf
 %attr(0755,root,root) %{_initrddir}/%{name}
 %attr(0711,%{name},%{name}) %dir /var/run/%{name}
+%attr(0711,%{name},%{name}) %dir /var/lib/%{name}
 %attr(0755,root,root) %{_sbindir}/*
 %attr(0644,root,root) %{_mandir}/*/*

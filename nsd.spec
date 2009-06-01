@@ -1,6 +1,6 @@
 Summary:	Complete implementation of an authoritative DNS name server
 Name:		nsd
-Version:	3.1.1
+Version:	3.2.2
 Release:	%mkrel 1
 License:	BSD-like
 Group:		System/Servers
@@ -34,17 +34,25 @@ perl -pi -e "s|/lib\b|/%{_lib}|g" configure*
 %serverbuild
 
 %configure2_5x \
+    --localstatedir=/var/lib \
     --enable-bind8-stats \
     --enable-plugins \
     --enable-checking \
     --enable-mmap \
+    --enable-dnssec \
+    --enable-ipv6 \
+    --enable-tsig \
+    --enable-nsig \
     --with-pidfile=/var/run/%{name}/%{name}.pid \
-    --localstatedir=/var/lib \
     --with-dbfile=/var/lib/%{name}/nsd.db \
     --with-difffile=/var/lib/%{name}/ixfr.db \
     --with-xfrdfile=/var/lib/%{name}/xfrd.state \
     --with-ssl \
     --with-user=%{name}
+
+# antiborker
+perl -pi -e "s|^piddir = .*|piddir = /var/run/%{name}|g" Makefile
+perl -pi -e "s|^dbdir = .*|dbdir = /var/lib/%{name}|g" Makefile
 
 %make
 
@@ -54,8 +62,6 @@ rm -rf %{buildroot}
 %makeinstall_std
 
 install -d %{buildroot}%{_initrddir}
-install -d %{buildroot}/var/run/%{name}
-install -d %{buildroot}/var/lib/%{name}
 
 install -m0755 %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 

@@ -1,6 +1,6 @@
 Summary:	Complete implementation of an authoritative DNS name server
 Name:		nsd
-Version:	3.2.2
+Version:	3.2.3
 Release:	%mkrel 1
 License:	BSD-like
 Group:		System/Servers

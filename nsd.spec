@@ -1,8 +1,8 @@
 Summary:	Complete implementation of an authoritative DNS name server
 Name:		nsd
-Version:	3.2.7
+Version:	3.2.8
 Release:	%mkrel 1
-License:	BSD	
+License:	BSD
 Group:		System/Servers
 URL:		http://open.nlnetlabs.nl/nsd/
 Source0:	http://open.nlnetlabs.nl/downloads/nsd/%{name}-%{version}.tar.gz

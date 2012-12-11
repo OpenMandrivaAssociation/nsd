@@ -1,0 +1,93 @@
+#!/bin/bash
+#
+# nsd:         Starts the NSD Name Server Daemon
+#
+# chkconfig: 345 55 45
+# description:  NSD is a complete implementation of an authoritative \
+#               DNS name server. 
+# processname: /usr/sbin/nsd
+# config: /etc/nsd/nsd.conf
+#
+### BEGIN INIT INFO
+# Provides: nsd
+# Required-Start: $syslog $network
+# Default-Start:  3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Starts the NSD Name Server Daemon
+# Description:  NSD is a complete implementation of an authoritative \
+#               DNS name server.
+### END INIT INFO
+
+# Sanity checks.
+[ -f /etc/nsd/nsd.conf ] || exit 0
+[ -x /usr/sbin/nsd ] || exit 0
+
+#extra verbosity
+#ZONEC_VERBOSE=-v
+OTHER_NSD_OPTS=""
+
+# Source function library.
+. /etc/init.d/functions
+
+. /etc/sysconfig/network
+
+# Check that networking is configured.
+[ ${NETWORKING} = "no" ] && exit 0
+
+start() {
+	/usr/sbin/nsdc rebuild >/dev/null
+	/usr/sbin/nsdc update >/dev/null
+	echo -n $"Starting nsd... "
+	nsd $OTHER_NSD_OPTS
+	RETVAL=$?
+	echo
+	/usr/sbin/nsdc notify
+	touch /var/lock/subsys/nsd
+	return $RETVAL
+}
+
+stop() {
+	echo -n $"Shutting down nsd services: "
+	killproc nsd
+	RETVAL=$?
+	if [ $RETVAL -eq 0 ] ; then
+	  rm -f /var/lock/subsys/nsd
+	  rm -f /var/run/nsd.pid
+	fi
+	echo
+	return $RETVAL
+}
+
+restart() {
+	stop
+	start
+}
+
+RETVAL=0
+
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart)
+	restart
+	;;
+  condrestart)
+        [ -f /var/lock/subsys/nsd ] && restart || :
+	;;
+  status)
+	/usr/sbin/nsdc running
+	;;
+  stats|reload|rebuild|running|update|notify)
+	/usr/sbin/nsdc $1 
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|status|restart|condrestart|stats|notify|reload|rebuild|running|update}"
+	exit 1
+esac
+
+exit $?

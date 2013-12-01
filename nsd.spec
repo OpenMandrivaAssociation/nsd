@@ -1,11 +1,11 @@
 Summary:	Complete implementation of an authoritative DNS name server
 Name:		nsd
-Version:	3.2.8
-Release:	%mkrel 1
+Version:	4.0.0
+Release:	1
 License:	BSD
 Group:		System/Servers
-URL:		http://open.nlnetlabs.nl/nsd/
-Source0:	http://open.nlnetlabs.nl/downloads/nsd/%{name}-%{version}.tar.gz
+URL:		http://www.nlnetlabs.nl/projects/nsd/
+Source0:	http://www.nlnetlabs.nl/downloads/%{name}/%{name}-%{version}.tar.gz
 Source1:	nsd.init
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
@@ -16,7 +16,6 @@ BuildRequires:	flex
 BuildRequires:	openssl-devel
 BuildRequires:	tcp_wrappers-devel
 Conflicts:	bind pdns
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 NSD is a complete implementation of an authoritative DNS name server. For

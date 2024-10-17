@@ -4,7 +4,7 @@ Version:	4.0.0
 Release:	2
 License:	BSD
 Group:		System/Servers
-URL:		http://www.nlnetlabs.nl/projects/nsd/
+URL:		https://www.nlnetlabs.nl/projects/nsd/
 Source0:	http://www.nlnetlabs.nl/downloads/%{name}/%{name}-%{version}.tar.gz
 Source1:	nsd.init
 Requires(post): rpm-helper

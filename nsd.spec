@@ -10,6 +10,7 @@ Source1:	nsd.init
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	pkgconfig(openssl)
+BuildRequires:	pkgconfig(libevent)
 BuildRequires:	tcp_wrappers-devel
 Conflicts:	bind pdns
 

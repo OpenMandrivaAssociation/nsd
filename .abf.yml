@@ -1,4 +1,2 @@
-removed_sources:
-  nsd-3.2.8.tar.gz: e8db690a09f53152f0dca6e4fbfabcc89003fced
 sources:
-  nsd-4.0.0.tar.gz: b3ebd669be8e830f62062d12be55242ca41da369
+  nsd-4.13.0.tar.gz: de5502c57ea12745f686fad678c572c8577e9921

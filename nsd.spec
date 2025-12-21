@@ -7,6 +7,11 @@ Group:		System/Servers
 URL:		https://www.nlnetlabs.nl/projects/nsd/
 Source0:	http://www.nlnetlabs.nl/downloads/%{name}/%{name}-%{version}.tar.gz
 Source1:	nsd.init
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	pkgconfig(openssl)

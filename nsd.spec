@@ -1,6 +1,6 @@
 Summary:	Complete implementation of an authoritative DNS name server
 Name:		nsd
-Version:	4.15.0
+Version:	4.15.4
 Release:	1
 License:	BSD
 Group:		System/Servers
